@@ -1,0 +1,2 @@
+# Nexi
+os_automation
