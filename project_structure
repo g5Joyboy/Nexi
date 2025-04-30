@@ -1,0 +1,187 @@
+NEXI/
+├── core/
+│   ├── __init__.py
+│   ├── intent_handler.py       # Main intent processing logic
+│   └── llm_processor.py        # LLM integration
+│
+├── intents/
+│   ├── __init__.py
+│   ├── file_operations/        # File-related intents
+│   │   ├── __init__.py
+│   │   ├── create_file.py
+│   │   ├── delete_file.py
+│   │   ├── move_file.py
+│   │   ├── rename_file.py
+│   │   ├── read_file.py
+│   │   └── write_file.py
+│   │
+│   ├── browser_operations/     # Browser-related intents
+│   │   ├── __init__.py
+│   │   ├── open_tab.py
+│   │   ├── close_tab.py
+│   │   ├── organize_tab.py
+│   │   └── web_extractor.py
+│   │
+│   ├── system_controls/        # System-related intents
+│   │   ├── __init__.py
+│   │   ├── volume_control.py
+│   │   └── brightness_control.py
+│   │
+│   ├── messaging/              # Communication intents
+│   │   ├── __init__.py
+│   │   ├── whatsapp.py
+│   │   └── email.py
+│   │
+│   └── unknown/               # Unknown intent handling
+│       ├── __init__.py
+│       └── fallback_handler.py
+│
+├── utils/
+│   ├── __init__.py
+│   ├── path_utils.py           # File path handling
+│   ├── browser_utils.py        # Browser automation utilities
+│   ├── system_utils.py         # System control utilities
+│   └── message_utils.py        # Messaging utilities
+│
+├── config/
+│   ├── __init__.py
+│   ├── intent_config.py        # Intent configurations
+│   ├── browser_config.py       # Browser settings
+│   └── messaging_config.py     # Messaging service settings
+│
+└── api/
+    ├── __init__.py
+    └── routes.py               # API endpoints
+
+
+
+
+
+
+
+          
+Let me explain the key components of the system:
+
+### 1. Core Components
+
+**intent_handler.py**
+- The brain of the system
+- Receives processed intent from LLM
+- Routes requests to appropriate intent handlers
+- Manages error handling and responses
+- Coordinates between different components
+
+**llm_processor.py**
+- Interfaces with your LLM
+- Processes raw user input
+- Extracts intent and parameters
+- Normalizes parameters for intent handlers
+- Handles ambiguous inputs
+
+### 2. API Layer
+
+**routes.py**
+- Provides HTTP endpoints
+- Main endpoint receives text input
+- Handles request validation
+- Manages response formatting
+- Implements error handling
+- Provides status endpoints
+
+### 3. Configuration
+
+**intent_config.py**
+- Defines supported intents
+- Maps intents to handlers
+- Defines required parameters
+- Sets validation rules
+- Configures default values
+
+**browser_config.py**
+- Browser automation settings
+- Default browser selection
+- Tab management rules
+- Security settings
+
+**messaging_config.py**
+- Messaging service credentials
+- API endpoints
+- Rate limiting rules
+- Message templates
+
+### 4. Utilities
+
+**path_utils.py**
+- Handles file paths safely
+- Validates file operations
+- Manages file permissions
+- Prevents directory traversal
+- Creates unique filenames
+
+**browser_utils.py**
+- Browser automation helpers
+- Tab management functions
+- Web scraping utilities
+- Session management
+
+**system_utils.py**
+- System settings control
+- Volume management
+- Brightness control
+- System state checking
+
+**message_utils.py**
+- Message formatting
+- Service selection
+- Template processing
+- Attachment handling
+
+### Flow Example:
+```plaintext
+1. User Input → API (routes.py)
+   "Create a file called notes.txt"
+
+2. API → LLM Processor
+   - Processes text
+   - Identifies intent as "create_file"
+   - Extracts parameters {filename: "notes.txt"}
+
+3. LLM → Intent Handler
+   - Validates intent and parameters
+   - Routes to create_file handler
+
+4. Intent Handler → Utils
+   - Uses path_utils to validate and normalize path
+   - Creates file using safe operations
+
+5. Utils → Response
+   - Returns success/failure
+   - Includes any relevant messages
+```
+
+The system is designed to be:
+- Modular: Each component has a specific role
+- Extensible: Easy to add new intents
+- Secure: Built-in validation and safety checks
+- Maintainable: Clear separation of concerns
+        
+Flow Example:
+1. User Input → API (routes.py)
+   "Create a file called notes.txt"
+
+2. API → LLM Processor
+   - Processes text
+   - Identifies intent as "create_file"
+   - Extracts parameters {filename: "notes.txt"}
+
+3. LLM → Intent Handler
+   - Validates intent and parameters
+   - Routes to create_file handler
+
+4. Intent Handler → Utils
+   - Uses path_utils to validate and normalize path
+   - Creates file using safe operations
+
+5. Utils → Response
+   - Returns success/failure
+   - Includes any relevant messages
