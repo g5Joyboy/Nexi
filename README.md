@@ -1,2 +1,0 @@
-# Nexi
-os_automation
